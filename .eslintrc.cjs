@@ -5,6 +5,13 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:react-hooks/recommended',
+    'plugin:tailwindcss/recommended',
+  ],
+  overrides: [
+    {
+      files: ['*.ts', '*.tsx', '*.js'],
+      parser: '@typescript-eslint/parser',
+    },
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
@@ -15,4 +22,4 @@ module.exports = {
       { allowConstantExport: true },
     ],
   },
-}
+};
