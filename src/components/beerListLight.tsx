@@ -1,0 +1,26 @@
+const beerListLight = [
+  'Helles',
+  'Kolsch',
+  'Witbier',
+  'Wheatbeer',
+  'APA',
+  'IPA',
+  'Lager',
+  'Bitter',
+  'Berliner Weisse',
+  'Brown Ale',
+  'Eisbock',
+  'Flanders Red Ale',
+  'Fruit Beer',
+  'Gose',
+  'Hefeweizen',
+  'Irish Red Ale',
+  'Kellerbier',
+  'Lambic',
+  'Mild Ale',
+  'Rye Beer',
+  'Vienna Lager',
+  'Pilsner',
+];
+
+export default beerListLight;
