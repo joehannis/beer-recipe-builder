@@ -6,12 +6,23 @@ import beerListDark from './components/beerListDark';
 
 function App() {
   const [beerList, setBeerList] = useState<string[]>([]);
+  const [malt, setMalt] = useState<string>('');
 
-  const beerListHander = (beerListArray: string[]) => () => {
+  const beerListHandler = (beerListArray: string[]) => () => {
     if (beerListArray === beerList) {
       setBeerList([]);
     } else {
       setBeerList(beerListArray);
+    }
+  };
+
+  const maltHandler = (maltInput: string) => () => {
+    if (maltInput === malt) {
+      setMalt('');
+      console.log(malt);
+    } else {
+      setMalt(maltInput);
+      console.log(malt);
     }
   };
 
@@ -27,11 +38,13 @@ function App() {
         <div className='flex flex-row items-center justify-start'>
           {/* Malt character 1 */}
           <div className='flex flex-col'>
-            <div onClick={beerListHander(beerListDark)}>
+            <div onClick={beerListHandler(beerListDark)}>
               <Selector name='Dark' />
             </div>
             <div>
-              <Selector name='Malt Forward' />
+              <div onClick={maltHandler('Malt Forward')}>
+                <Selector name='Malt Forward' />
+              </div>
             </div>
             <div>
               <Selector name='Hoppy' />
@@ -42,11 +55,13 @@ function App() {
           </div>
           {/* Malt character 2 */}
           <div className='flex flex-col'>
-            <div onClick={beerListHander(beerListLight)}>
+            <div onClick={beerListHandler(beerListLight)}>
               <Selector name='Light' />
             </div>
             <div>
-              <Selector name='Malt Light' />
+              <div onClick={maltHandler('Malt Light')}>
+                <Selector name='Malt Light' />
+              </div>
             </div>
             <div>
               <Selector name='Balanced' />
