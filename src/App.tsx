@@ -7,7 +7,7 @@ import beerListDark from './components/beerListDark';
 function App() {
   const [beerList, setBeerList] = useState<string[]>([]);
   const [malt, setMalt] = useState<string>('');
-  const [balance, setBalance] = us eState<string>('');
+  const [balance, setBalance] = useState<string>('');
   const [body, setBody] = useState<string>('');
 
   const beerListHandler = (beerListArray: string[]) => () => {
