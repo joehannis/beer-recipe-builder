@@ -9,6 +9,11 @@ const beerListDark = [
   'EisBock',
   'Imperial Stout',
   'Dark Mild',
+  'Table Beer',
+  'Brown Ale',
+  'Old Ale',
+  'Barleywine',
+  'Scotch Ale',
 ];
 
 export default beerListDark;

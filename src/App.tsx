@@ -5,6 +5,8 @@ import Selector from './components/Selector';
 import beerListLight from './components/beerListLight';
 import beerListDark from './components/beerListDark';
 import beerListMalt from './components/beerListMalt';
+import beerListYeast from './components/beerListYeast';
+import beerListHoppy from './components/beerListHoppy';
 
 function App() {
   const [beerList, setBeerList] = useState<string[]>([]);
@@ -36,7 +38,12 @@ function App() {
       setBeerList(updatedBeerList);
     } else if (malt === 'Hop Forward') {
       const updatedBeerList = beerList.filter((beer) => {
-        return !beerListMalt.includes(beer);
+        return beerListHoppy.includes(beer);
+      });
+      setBeerList(updatedBeerList);
+    } else if (malt === 'Yeast Forward') {
+      const updatedBeerList = beerList.filter((beer) => {
+        return beerListYeast.includes(beer);
       });
       setBeerList(updatedBeerList);
     }
@@ -86,6 +93,14 @@ function App() {
             </div>
             <div onClick={bodyHandler('Light-Bodied')}>
               <Selector name='Light-Bodied' />
+            </div>
+          </div>
+          <div className='flex flex-col'>
+            <div></div>
+            <div>
+              <div onClick={maltHandler('Yeast Forward')}>
+                <Selector name='Yeast Forward' />
+              </div>
             </div>
           </div>
 

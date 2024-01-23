@@ -21,6 +21,11 @@ const beerListLight = [
   'Vienna Lager',
   'Pilsner',
   'NEIPA',
+  'Saison',
+  'Sour',
+  'Steam Beer',
+  'Tripel',
+  'West Coast IPA',
 ];
 
 export default beerListLight;
