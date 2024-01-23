@@ -5,7 +5,6 @@ const beerListLight = [
   'Wheatbeer',
   'APA',
   'IPA',
-  'Lager',
   'Bitter',
   'Berliner Weisse',
   'Brown Ale',
@@ -21,6 +20,7 @@ const beerListLight = [
   'Rye Beer',
   'Vienna Lager',
   'Pilsner',
+  'NEIPA',
 ];
 
 export default beerListLight;

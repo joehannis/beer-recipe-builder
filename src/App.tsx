@@ -1,14 +1,16 @@
 import { useState } from 'react';
+import { useEffect } from 'react';
 
 import Selector from './components/Selector';
 import beerListLight from './components/beerListLight';
 import beerListDark from './components/beerListDark';
+import beerListMalt from './components/beerListMalt';
 
 function App() {
   const [beerList, setBeerList] = useState<string[]>([]);
   const [malt, setMalt] = useState<string>('');
-  const [balance, setBalance] = useState<string>('');
   const [body, setBody] = useState<string>('');
+  console.log(malt);
 
   const beerListHandler = (beerListArray: string[]) => () => {
     if (beerListArray === beerList) {
@@ -26,13 +28,19 @@ function App() {
     }
   };
 
-  const balanceHandler = (balanceInput: string) => () => {
-    if (balanceInput === balance) {
-      setBalance('');
-    } else {
-      setBalance(balanceInput);
+  useEffect(() => {
+    if (malt === 'Malt Forward') {
+      const updatedBeerList = beerList.filter((beer) => {
+        return beerListMalt.includes(beer);
+      });
+      setBeerList(updatedBeerList);
+    } else if (malt === 'Hop Forward') {
+      const updatedBeerList = beerList.filter((beer) => {
+        return !beerListMalt.includes(beer);
+      });
+      setBeerList(updatedBeerList);
     }
-  };
+  }, [malt]);
 
   const bodyHandler = (bodyInput: string) => () => {
     if (bodyInput === body) {
@@ -62,9 +70,6 @@ function App() {
                 <Selector name='Malt Forward' />
               </div>
             </div>
-            <div onClick={balanceHandler('Hoppy')}>
-              <Selector name='Hoppy' />
-            </div>
             <div onClick={bodyHandler('Full-Bodied')}>
               <Selector name='Full-Bodied' />
             </div>
@@ -75,12 +80,9 @@ function App() {
               <Selector name='Light' />
             </div>
             <div>
-              <div onClick={maltHandler('Malt Light')}>
-                <Selector name='Malt Light' />
+              <div onClick={maltHandler('Hop Forward')}>
+                <Selector name='Hop Forward' />
               </div>
-            </div>
-            <div onClick={balanceHandler('Balanced')}>
-              <Selector name='Balanced' />
             </div>
             <div onClick={bodyHandler('Light-Bodied')}>
               <Selector name='Light-Bodied' />
