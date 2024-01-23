@@ -1,61 +1,119 @@
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { useRef } from 'react';
 
 import Selector from './components/Selector';
-import beerListLight from './components/beerListLight';
-import beerListDark from './components/beerListDark';
-import beerListMalt from './components/beerListMalt';
-import beerListYeast from './components/beerListYeast';
-import beerListHoppy from './components/beerListHoppy';
+import beerList from './components/beerList';
 
 function App() {
-  const [beerList, setBeerList] = useState<string[]>([]);
+  interface Beer {
+    name: string;
+    malt: string;
+    body: string;
+    balance: string;
+  }
+  const [beerListUpdate, setBeerListUpdate] = useState<Beer[]>(beerList);
+  console.log(beerListUpdate);
   const [malt, setMalt] = useState<string>('');
-  const [body, setBody] = useState<string>('');
   console.log(malt);
+  const [body, setBody] = useState<string>('');
+  const [balance, setBalance] = useState<string>('');
+  const unselected: string =
+    'flex justify-center rounded-none border-2 border-solid border-black bg-white hover:bg-red-600 hover:text-white';
+  const selected: string =
+    'flex justify-center rounded-none border-2 border-solid border-black bg-red-600 hover:bg-white hover:text-red-600';
 
-  const beerListHandler = (beerListArray: string[]) => () => {
-    if (beerListArray === beerList) {
-      setBeerList([]);
-    } else {
-      setBeerList(beerListArray);
-    }
-  };
+  let transformDark = useRef(unselected).current;
+  let transformLight = useRef(unselected).current;
+  let transformFullBodied = useRef(unselected).current;
+  let transformLightBodied = useRef(unselected).current;
+  let transformMaltForward = useRef(unselected).current;
+  let transformHopForward = useRef(unselected).current;
+  let transformYeastForward = useRef(unselected).current;
 
   const maltHandler = (maltInput: string) => () => {
-    if (maltInput === malt) {
-      setMalt('');
-    } else {
-      setMalt(maltInput);
-    }
+    setMalt(maltInput);
+  };
+
+  const bodyHandler = (bodyInput: string) => () => {
+    setBody(bodyInput);
+  };
+
+  const balanceHandler = (balanceInput: string) => () => {
+    setBalance(balanceInput);
   };
 
   useEffect(() => {
-    if (malt === 'Malt Forward') {
-      const updatedBeerList = beerList.filter((beer) => {
-        return beerListMalt.includes(beer);
+    if (malt === 'Dark') {
+      const updatedBeerList: Beer[] = beerList.filter((beer) => {
+        if (balance !== '' && body !== '') {
+          if (beer.balance === balance && beer.body === body) {
+            return beer.malt === 'Dark';
+          }
+        } else if (balance !== '') {
+          if (beer.balance === balance) {
+            return beer.malt === 'Dark';
+          }
+        } else if (body !== '') {
+          if (beer.body === body) {
+            return beer.malt === 'Dark';
+          }
+        } else {
+          return beer.malt === 'Dark';
+        }
       });
-      setBeerList(updatedBeerList);
-    } else if (malt === 'Hop Forward') {
-      const updatedBeerList = beerList.filter((beer) => {
-        return beerListHoppy.includes(beer);
+      setBeerListUpdate(updatedBeerList);
+    } else if (malt === 'Light') {
+      const updatedBeerList: Beer[] = beerList.filter((beer) => {
+        if (balance !== '' && body !== '') {
+          if (beer.balance === balance && beer.body === body) {
+            return beer.malt === 'Light';
+          }
+        } else if (balance !== '') {
+          if (beer.balance === balance) {
+            return beer.malt === 'Light';
+          }
+        } else if (body !== '') {
+          if (beer.body === body) {
+            return beer.malt === 'Light';
+          }
+        } else {
+          return beer.malt === 'Light';
+        }
       });
-      setBeerList(updatedBeerList);
-    } else if (malt === 'Yeast Forward') {
-      const updatedBeerList = beerList.filter((beer) => {
-        return beerListYeast.includes(beer);
-      });
-      setBeerList(updatedBeerList);
+      setBeerListUpdate(updatedBeerList);
     }
-  }, [malt]);
+  }, [malt, balance, body]);
 
-  const bodyHandler = (bodyInput: string) => () => {
-    if (bodyInput === body) {
-      setBody('');
-    } else {
-      setBody(bodyInput);
-    }
-  };
+  if (malt === 'Dark') {
+    transformDark = selected;
+    transformLight = unselected;
+  } else if (malt === 'Light') {
+    transformLight = selected;
+    transformDark = unselected;
+  }
+
+  if (body === 'Full-Bodied') {
+    transformFullBodied = selected;
+    transformLightBodied = unselected;
+  } else if (body === 'Light-Bodied') {
+    transformLightBodied = selected;
+    transformFullBodied = unselected;
+  }
+
+  if (balance === 'Malt Forward') {
+    transformMaltForward = selected;
+    transformHopForward = unselected;
+    transformYeastForward = unselected;
+  } else if (balance === 'Hop Forward') {
+    transformHopForward = selected;
+    transformMaltForward = unselected;
+    transformYeastForward = unselected;
+  } else if (balance === 'Yeast Forward') {
+    transformYeastForward = selected;
+    transformMaltForward = unselected;
+    transformHopForward = unselected;
+  }
 
   return (
     // Main App Container
@@ -69,36 +127,53 @@ function App() {
         <div className='flex flex-row items-center justify-start'>
           {/* Malt character 1 */}
           <div className='flex flex-col'>
-            <div onClick={beerListHandler(beerListDark)}>
+            <div className={transformDark} onClick={maltHandler('Dark')}>
               <Selector name='Dark' />
             </div>
             <div>
-              <div onClick={maltHandler('Malt Forward')}>
+              <div
+                className={
+                  transformMaltForward === selected ? selected : unselected
+                }
+                onClick={balanceHandler('Malt Forward')}
+              >
                 <Selector name='Malt Forward' />
               </div>
             </div>
-            <div onClick={bodyHandler('Full-Bodied')}>
+            <div
+              className={transformFullBodied}
+              onClick={bodyHandler('Full-Bodied')}
+            >
               <Selector name='Full-Bodied' />
             </div>
           </div>
           {/* Malt character 2 */}
           <div className='flex flex-col'>
-            <div onClick={beerListHandler(beerListLight)}>
+            <div className={transformLight} onClick={maltHandler('Light')}>
               <Selector name='Light' />
             </div>
             <div>
-              <div onClick={maltHandler('Hop Forward')}>
+              <div
+                className={transformHopForward}
+                onClick={balanceHandler('Hop Forward')}
+              >
                 <Selector name='Hop Forward' />
               </div>
             </div>
-            <div onClick={bodyHandler('Light-Bodied')}>
+            <div
+              className={transformLightBodied}
+              onClick={bodyHandler('Light-Bodied')}
+            >
               <Selector name='Light-Bodied' />
             </div>
           </div>
           <div className='flex flex-col'>
             <div></div>
             <div>
-              <div onClick={maltHandler('Yeast Forward')}>
+              <div
+                className={transformYeastForward}
+                onClick={balanceHandler('Yeast Forward')}
+              >
                 <Selector name='Yeast Forward' />
               </div>
             </div>
@@ -107,9 +182,9 @@ function App() {
           <div className='flex flex-row items-center'>
             {/* Possible Styles */}
             <div className='flex flex-col'>
-              {beerList.map((beer) => (
-                <div key={beer}>
-                  <Selector name={beer} />
+              {beerListUpdate.map((beer) => (
+                <div key={(beer as { name: string }).name}>
+                  <Selector beer={beer} />
                 </div>
               ))}
             </div>
