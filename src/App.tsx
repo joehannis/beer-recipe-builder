@@ -7,6 +7,8 @@ import beerListDark from './components/beerListDark';
 function App() {
   const [beerList, setBeerList] = useState<string[]>([]);
   const [malt, setMalt] = useState<string>('');
+  const [balance, setBalance] = us eState<string>('');
+  const [body, setBody] = useState<string>('');
 
   const beerListHandler = (beerListArray: string[]) => () => {
     if (beerListArray === beerList) {
@@ -19,10 +21,24 @@ function App() {
   const maltHandler = (maltInput: string) => () => {
     if (maltInput === malt) {
       setMalt('');
-      console.log(malt);
     } else {
       setMalt(maltInput);
-      console.log(malt);
+    }
+  };
+
+ const balanceHandler = (balanceInput: string) => () => {
+    if (balanceInput === balance) {
+      setBalance('');
+    } else {
+      setBalance(balanceInput);
+    }
+  };
+
+ const bodyHandler = (bodyInput: string) => () => {
+    if (bodyInput === body) {
+      setBody('');
+    } else {
+      setBodt(bodyInput);
     }
   };
 
@@ -46,10 +62,10 @@ function App() {
                 <Selector name='Malt Forward' />
               </div>
             </div>
-            <div>
+            <div onClick={balanceHandler('Hoppy')}>
               <Selector name='Hoppy' />
             </div>
-            <div>
+            <div onClick={bodyHandler('Full-Bodied')}>
               <Selector name='Full-Bodied' />
             </div>
           </div>
@@ -63,10 +79,10 @@ function App() {
                 <Selector name='Malt Light' />
               </div>
             </div>
-            <div>
+            <div onClick={balanceHandler('Balanced')}>
               <Selector name='Balanced' />
             </div>
-            <div>
+            <div onClick={bodyHandler('Light-Bodied')}>
               <Selector name='Light-Bodied' />
             </div>
           </div>
