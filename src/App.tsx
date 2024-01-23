@@ -26,7 +26,7 @@ function App() {
     }
   };
 
- const balanceHandler = (balanceInput: string) => () => {
+  const balanceHandler = (balanceInput: string) => () => {
     if (balanceInput === balance) {
       setBalance('');
     } else {
@@ -34,11 +34,11 @@ function App() {
     }
   };
 
- const bodyHandler = (bodyInput: string) => () => {
+  const bodyHandler = (bodyInput: string) => () => {
     if (bodyInput === body) {
       setBody('');
     } else {
-      setBodt(bodyInput);
+      setBody(bodyInput);
     }
   };
 
