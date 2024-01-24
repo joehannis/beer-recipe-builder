@@ -95,34 +95,44 @@ function App() {
     }
   }, [malt, balance, body]);
 
-  if (malt === 'Dark') {
-    transformDark = selected;
-    transformLight = unselected;
-  } else if (malt === 'Light') {
-    transformLight = selected;
-    transformDark = unselected;
+  switch (malt) {
+    case 'Dark':
+      transformDark = selected;
+      transformLight = unselected;
+      break;
+    case 'Light':
+      transformLight = selected;
+      transformDark = unselected;
+      break;
   }
 
-  if (body === 'Full-Bodied') {
-    transformFullBodied = selected;
-    transformLightBodied = unselected;
-  } else if (body === 'Light-Bodied') {
-    transformLightBodied = selected;
-    transformFullBodied = unselected;
+  switch (body) {
+    case 'Full-Bodied':
+      transformFullBodied = selected;
+      transformLightBodied = unselected;
+      break;
+    case 'Light-Bodied':
+      transformLightBodied = selected;
+      transformFullBodied = unselected;
+      break;
   }
 
-  if (balance === 'Malt Forward') {
-    transformMaltForward = selected;
-    transformHopForward = unselected;
-    transformYeastForward = unselected;
-  } else if (balance === 'Hop Forward') {
-    transformHopForward = selected;
-    transformMaltForward = unselected;
-    transformYeastForward = unselected;
-  } else if (balance === 'Yeast Forward') {
-    transformYeastForward = selected;
-    transformMaltForward = unselected;
-    transformHopForward = unselected;
+  switch (balance) {
+    case 'Malt Forward':
+      transformMaltForward = selected;
+      transformHopForward = unselected;
+      transformYeastForward = unselected;
+      break;
+    case 'Hop Forward':
+      transformHopForward = selected;
+      transformMaltForward = unselected;
+      transformYeastForward = unselected;
+      break;
+    case 'Yeast Forward':
+      transformYeastForward = selected;
+      transformMaltForward = unselected;
+      transformHopForward = unselected;
+      break;
   }
 
   return (
