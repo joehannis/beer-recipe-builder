@@ -15,9 +15,11 @@ function App() {
   const [beerListUpdate, setBeerListUpdate] = useState<Beer[]>(beerList);
   console.log(beerListUpdate);
   const [malt, setMalt] = useState<string>('');
-  console.log(malt);
   const [body, setBody] = useState<string>('');
   const [balance, setBalance] = useState<string>('');
+  const [beerSelection, setBeerSelection] = useState<string>('');
+  console.log(beerSelection);
+
   const unselected: string =
     'flex justify-center rounded-none border-2 border-solid border-black bg-white hover:bg-red-600 hover:text-white';
   const selected: string =
@@ -203,8 +205,13 @@ function App() {
             {/* Possible Styles */}
             <div className='flex flex-col'>
               {beerListUpdate.map((beer) => (
-                <div key={(beer as { name: string }).name}>
-                  <Selector beer={beer} />
+                <div
+                  key={(beer as { name: string }).name}
+                  className={
+                    beer.name === beerSelection ? selected : unselected
+                  }
+                >
+                  <Selector beer={beer} setBeerSelection={setBeerSelection} />
                 </div>
               ))}
             </div>
