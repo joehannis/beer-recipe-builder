@@ -4,6 +4,7 @@ import { useRef } from 'react';
 
 import Selector from './components/Selector';
 import beerList from './components/beerList';
+import fetchRecipe from './components/fetchRecipe';
 
 function App() {
   interface Beer {
@@ -13,12 +14,14 @@ function App() {
     balance: string;
   }
   const [beerListUpdate, setBeerListUpdate] = useState<Beer[]>(beerList);
-  console.log(beerListUpdate);
   const [malt, setMalt] = useState<string>('');
   const [body, setBody] = useState<string>('');
   const [balance, setBalance] = useState<string>('');
   const [beerSelection, setBeerSelection] = useState<string>('');
-  console.log(beerSelection);
+  const [recipe, setRecipe] = useState<string>('');
+  const [image, setImage] = useState<string>('');
+  console.log('Recipe:', recipe);
+  console.log('Image:', image);
 
   const unselected: string =
     'flex justify-center rounded-none border-2 border-solid border-black bg-white hover:bg-red-600 hover:text-white';
@@ -53,6 +56,13 @@ function App() {
 
   const balanceHandler = (balanceInput: string) => () => {
     setBalance(balanceInput);
+  };
+
+  const recipeHandler = (beer: string) => () => {
+    fetchRecipe(beer).then((data) => {
+      setRecipe(data.recipe);
+      setImage(data.image);
+    });
   };
 
   useEffect(() => {
@@ -207,6 +217,7 @@ function App() {
               {beerListUpdate.map((beer) => (
                 <div
                   key={(beer as { name: string }).name}
+                  onClick={recipeHandler(beer.name)}
                   className={
                     beer.name === beerSelection ? selected : unselected
                   }
@@ -215,6 +226,10 @@ function App() {
                 </div>
               ))}
             </div>
+          </div>
+          {/* Recipe */}
+          <div className='flex flex-col'>
+            <div>{recipe ? recipe : ''}</div>
           </div>
         </div>
       </div>
