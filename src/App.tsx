@@ -23,13 +23,23 @@ function App() {
   const selected: string =
     'flex justify-center rounded-none border-2 border-solid border-black bg-red-600 hover:bg-white hover:text-red-600';
 
-  let transformDark = useRef(unselected).current;
-  let transformLight = useRef(unselected).current;
-  let transformFullBodied = useRef(unselected).current;
-  let transformLightBodied = useRef(unselected).current;
-  let transformMaltForward = useRef(unselected).current;
-  let transformHopForward = useRef(unselected).current;
-  let transformYeastForward = useRef(unselected).current;
+  let [
+    transformDark,
+    transformLight,
+    transformFullBodied,
+    transformLightBodied,
+    transformMaltForward,
+    transformHopForward,
+    transformYeastForward,
+  ] = useRef([
+    unselected,
+    unselected,
+    unselected,
+    unselected,
+    unselected,
+    unselected,
+    unselected,
+  ]).current;
 
   const maltHandler = (maltInput: string) => () => {
     setMalt(maltInput);
