@@ -5,6 +5,7 @@ import { useRef } from 'react';
 import Selector from './components/Selector';
 import beerList from './components/beerList';
 import fetchRecipe from './components/fetchRecipe';
+import BeerLoader from './components/beer-loader/BeerLoader';
 
 function App() {
   interface Beer {
@@ -15,6 +16,8 @@ function App() {
   }
 
   const [beerListUpdate, setBeerListUpdate] = useState<Beer[]>(beerList);
+  const [loading, setLoading] = useState(false);
+  console.log(loading);
   const [malt, setMalt] = useState<string>('');
   const [body, setBody] = useState<string>('');
   const [balance, setBalance] = useState<string>('');
@@ -61,9 +64,11 @@ function App() {
   };
 
   const recipeHandler = (beer: string) => () => {
+    setLoading(true);
     fetchRecipe(beer).then((data) => {
       setRecipe(data.recipe);
       setImage(data.image);
+      setLoading(false);
     });
   };
 
@@ -158,7 +163,12 @@ function App() {
       </h1>
       {/* Body */}
       <div className='flex flex-col'>
-        {recipe.ingredients.length === 0 && (
+        {loading && (
+          <div>
+            <BeerLoader />
+          </div>
+        )}
+        {!loading && recipe.ingredients.length === 0 && (
           <div className='flex flex-row items-center justify-start'>
             {/* Malt character 1 */}
             <div className='flex flex-col'>
