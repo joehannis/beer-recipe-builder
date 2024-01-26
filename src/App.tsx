@@ -151,70 +151,70 @@ function App() {
 
   return (
     // Main App Container
-    <div className='size-full flex-col '>
+    <div className='size-full flex-col'>
       {/* Header */}
       <h1 className='flex h-20 flex-row items-center justify-center text-3xl font-bold text-red-600 underline'>
         Beer Recipe Creator
       </h1>
       {/* Body */}
-      <div>
-        <div className='flex flex-row items-center justify-start'>
-          {/* Malt character 1 */}
-          <div className='flex flex-col'>
-            <div className={transformDark} onClick={maltHandler('Dark')}>
-              <Selector name='Dark' />
-            </div>
-            <div>
+      <div className='flex flex-col'>
+        {recipe.ingredients.length === 0 && (
+          <div className='flex flex-row items-center justify-start'>
+            {/* Malt character 1 */}
+            <div className='flex flex-col'>
+              <div className={transformDark} onClick={maltHandler('Dark')}>
+                <Selector name='Dark' />
+              </div>
+              <div>
+                <div
+                  className={
+                    transformMaltForward === selected ? selected : unselected
+                  }
+                  onClick={balanceHandler('Malt Forward')}
+                >
+                  <Selector name='Malt Forward' />
+                </div>
+              </div>
               <div
-                className={
-                  transformMaltForward === selected ? selected : unselected
-                }
-                onClick={balanceHandler('Malt Forward')}
+                className={transformFullBodied}
+                onClick={bodyHandler('Full-Bodied')}
               >
-                <Selector name='Malt Forward' />
+                <Selector name='Full-Bodied' />
               </div>
             </div>
-            <div
-              className={transformFullBodied}
-              onClick={bodyHandler('Full-Bodied')}
-            >
-              <Selector name='Full-Bodied' />
-            </div>
-          </div>
-          {/* Malt character 2 */}
-          <div className='flex flex-col'>
-            <div className={transformLight} onClick={maltHandler('Light')}>
-              <Selector name='Light' />
-            </div>
-            <div>
+            {/* Malt character 2 */}
+            <div className='flex flex-col'>
+              <div className={transformLight} onClick={maltHandler('Light')}>
+                <Selector name='Light' />
+              </div>
+              <div>
+                <div
+                  className={transformHopForward}
+                  onClick={balanceHandler('Hop Forward')}
+                >
+                  <Selector name='Hop Forward' />
+                </div>
+              </div>
               <div
-                className={transformHopForward}
-                onClick={balanceHandler('Hop Forward')}
+                className={transformLightBodied}
+                onClick={bodyHandler('Light-Bodied')}
               >
-                <Selector name='Hop Forward' />
+                <Selector name='Light-Bodied' />
               </div>
             </div>
-            <div
-              className={transformLightBodied}
-              onClick={bodyHandler('Light-Bodied')}
-            >
-              <Selector name='Light-Bodied' />
-            </div>
-          </div>
-          <div className='flex flex-col'>
-            <div></div>
-            <div>
-              <div
-                className={transformYeastForward}
-                onClick={balanceHandler('Yeast Forward')}
-              >
-                <Selector name='Yeast Forward' />
+            <div className='flex flex-col'>
+              <div></div>
+              <div>
+                <div
+                  className={transformYeastForward}
+                  onClick={balanceHandler('Yeast Forward')}
+                >
+                  <Selector name='Yeast Forward' />
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className='flex flex-row items-center'>
-            {/* Possible Styles */}
+            {/* Render beer list */}
             <div className='flex flex-col'>
               {beerListUpdate.map((beer) => (
                 <div
@@ -229,34 +229,40 @@ function App() {
               ))}
             </div>
           </div>
-          {/* Recipe */}
-          <div className='flex flex-col'>
-            <h3>Ingredients</h3>
-            {recipe &&
-              recipe.ingredients &&
-              recipe.ingredients.map((ingredient, index) => (
-                <div key={index}>
-                  {ingredient.ingredient} {ingredient.amount}
-                </div>
-              ))}
-          </div>
-          <div className='flex flex-col'>
-            <h3>Instructions</h3>
-            {recipe &&
-              recipe.instructions &&
-              recipe.instructions.map((instruction, index) => (
-                <div key={index}>{instruction}</div>
-              ))}
-          </div>
-
-          {/* Image */}
-          <div className='flex flex-col'>
-            <div>
-              <img src={image} alt='' />
-            </div>
-          </div>
-        </div>
+        )}
       </div>
+
+      {/* Recipe */}
+      {recipe && recipe.ingredients.length > 0 && (
+        <div className='flex flex-col'>
+          <h3>Ingredients</h3>
+          {recipe.instructions &&
+            recipe.instructions.map((instruction, index) => (
+              <div key={index}>{instruction}</div>
+            ))}
+          <h3>Instructions</h3>
+          {recipe &&
+            recipe.instructions &&
+            recipe.instructions.map((instruction, index) => (
+              <div key={index}>{instruction}</div>
+            ))}
+        </div>
+      )}
+
+      {/* Image */}
+      {recipe && recipe.ingredients.length > 0 && (
+        <div className='flex flex-row'>
+          <div>
+            <img src={image} alt='' />
+          </div>
+          <button
+            className={unselected}
+            onClick={() => setRecipe({ ingredients: [], instructions: [] })}
+          >
+            Clear
+          </button>
+        </div>
+      )}
     </div>
   );
 }
