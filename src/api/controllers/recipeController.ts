@@ -30,7 +30,7 @@ const recipeController = {
                   },
                 },
                 description:
-                  'The ingredients to use in the recipe with the amount in grams.',
+                  'The ingredients to use in the recipe with the amount in grams. Include the amount of water to use in the mash and sparge in L.',
               },
               instructions: {
                 type: 'array',
@@ -38,7 +38,7 @@ const recipeController = {
                   type: 'string',
                 },
                 description:
-                  'The instructions to use in the recipe with temperatures in C and F.',
+                  'The instructions to use in the recipe with temperatures in C and F. Include the weight of ingredients needed at each step. Be detailed.',
               },
             },
             required: ['ingredients', 'instructions'],

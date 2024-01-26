@@ -156,10 +156,10 @@ function App() {
 
   return (
     // Main App Container
-    <div className='mb-10 size-full flex-col'>
+    <div className='mb-10 size-full max-h-full flex-col'>
       {/* Header */}
-      <div>
-        <h1 className='flex h-20 flex-row items-center justify-center text-3xl font-bold text-red-600 underline'>
+      <div className='min-h-28'>
+        <h1 className='flex flex-row items-center justify-center text-3xl font-bold text-red-600 underline'>
           Beer Recipe Creator
         </h1>
       </div>
@@ -172,7 +172,7 @@ function App() {
           </div>
         )}
         {!loading && recipe.ingredients.length === 0 && (
-          <div className='mb-16 grid grid-cols-6 grid-rows-3'>
+          <div className='mx-6 mb-16 mt-8 grid grid-cols-6 grid-rows-3 gap-1.5'>
             <div className='col-span-3 col-start-1 row-start-1'>
               <div className={transformDark} onClick={maltHandler('Dark')}>
                 <Selector name='Dark' />
@@ -231,7 +231,7 @@ function App() {
 
         {/* Render beer list */}
         {!loading && recipe.ingredients.length === 0 && malt !== '' && (
-          <div className='flex flex-col'>
+          <div className=' mx-6 grid grid-cols-6 grid-rows-3 gap-1.5'>
             {beerListUpdate.map((beer) => (
               <div
                 key={(beer as { name: string }).name}
@@ -247,33 +247,40 @@ function App() {
 
       {/* Recipe */}
       {recipe && recipe.ingredients.length > 0 && (
-        <div className='flex flex-col'>
-          <h3>Ingredients</h3>
-          {recipe.instructions &&
-            recipe.instructions.map((instruction, index) => (
-              <div key={index}>{instruction}</div>
-            ))}
-          <h3>Instructions</h3>
-          {recipe &&
-            recipe.instructions &&
-            recipe.instructions.map((instruction, index) => (
-              <div key={index}>{instruction}</div>
-            ))}
-        </div>
-      )}
+        <div className='grid grid-cols-2'>
+          <div className='col-start-1 ml-10 justify-items-center '>
+            <h3 className='mb-10'>Ingredients</h3>
+            {recipe.ingredients &&
+              recipe.ingredients.map((ingredient, index) => (
+                <>
+                  <div key={index}>
+                    <span>{ingredient.ingredient}</span>:{' '}
+                    <span>{ingredient.amount}</span>
+                  </div>
+                </>
+              ))}
 
-      {/* Image */}
-      {recipe && recipe.ingredients.length > 0 && (
-        <div className='flex flex-row'>
-          <div>
-            <img src={image} alt='' />
+            <h3 className='my-10'>Instructions</h3>
+            {recipe &&
+              recipe.instructions &&
+              recipe.instructions.map((instruction, index) => (
+                <div key={index}>{instruction}</div>
+              ))}
           </div>
-          <button
-            className={unselected}
-            onClick={() => setRecipe({ ingredients: [], instructions: [] })}
-          >
-            Clear
-          </button>
+
+          {/* Image */}
+
+          <div className='flex flex-row'>
+            <div>
+              <img src={image} alt='' className='max-w-36' />
+            </div>
+            <button
+              className={unselected}
+              onClick={() => setRecipe({ ingredients: [], instructions: [] })}
+            >
+              Clear
+            </button>
+          </div>
         </div>
       )}
     </div>
