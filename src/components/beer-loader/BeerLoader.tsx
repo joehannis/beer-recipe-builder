@@ -8,7 +8,6 @@ const BeerLoader: React.FC = () => {
       <div className='glass-wrapper'>
         <div className='glass'>
           <div className='beer'>
-            // eslint-disable-next-line tailwindcss/no-custom-classname
             <div className='foam'>
               <span className='foambubble'></span>
               <span className='foambubble'></span>
