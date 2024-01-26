@@ -156,132 +156,134 @@ function App() {
 
   return (
     // Main App Container
-    <div className='mb-10 size-full max-h-full flex-col'>
+    <div className='size-full max-h-full flex-col'>
       {/* Header */}
-      <div className='min-h-28'>
+      <div className='my-12'>
         <h1 className='flex flex-row items-center justify-center text-3xl font-bold text-red-600 underline'>
           Beer Recipe Creator
         </h1>
       </div>
 
       {/* Body */}
-      <div className='flex flex-col'>
-        {loading && (
-          <div>
-            <BeerLoader />
+      {loading && (
+        <div className='flex content-center justify-center pb-12'>
+          <BeerLoader />
+        </div>
+      )}
+      {!loading && recipe.ingredients.length === 0 && (
+        <div className='mx-6 mb-16 mt-8 grid grid-cols-6 grid-rows-3 gap-1.5'>
+          <div className='col-span-3 col-start-1 row-start-1'>
+            <div className={transformDark} onClick={maltHandler('Dark')}>
+              <Selector name='Dark' />
+            </div>
           </div>
-        )}
-        {!loading && recipe.ingredients.length === 0 && (
-          <div className='mx-6 mb-16 mt-8 grid grid-cols-6 grid-rows-3 gap-1.5'>
-            <div className='col-span-3 col-start-1 row-start-1'>
-              <div className={transformDark} onClick={maltHandler('Dark')}>
-                <Selector name='Dark' />
-              </div>
+          <div className='col-span-2 col-start-1 row-start-2'>
+            <div
+              className={
+                transformMaltForward === selected ? selected : unselected
+              }
+              onClick={balanceHandler('Malt Forward')}
+            >
+              <Selector name='Malt Forward' />
             </div>
-            <div className='col-span-2 col-start-1 row-start-2'>
-              <div
-                className={
-                  transformMaltForward === selected ? selected : unselected
-                }
-                onClick={balanceHandler('Malt Forward')}
-              >
-                <Selector name='Malt Forward' />
-              </div>
+          </div>
+          <div className='col-span-3 col-start-1 row-start-3'>
+            <div
+              className={transformFullBodied}
+              onClick={bodyHandler('Full-Bodied')}
+            >
+              <Selector name='Full-Bodied' />
             </div>
-            <div className='col-span-3 col-start-1 row-start-3'>
-              <div
-                className={transformFullBodied}
-                onClick={bodyHandler('Full-Bodied')}
-              >
-                <Selector name='Full-Bodied' />
-              </div>
+          </div>
+          <div className='col-span-3 col-start-4 row-start-1'>
+            <div className={transformLight} onClick={maltHandler('Light')}>
+              <Selector name='Light' />
             </div>
-            <div className='col-span-3 col-start-4 row-start-1'>
-              <div className={transformLight} onClick={maltHandler('Light')}>
-                <Selector name='Light' />
-              </div>
+          </div>
+          <div className='col-span-2 col-start-3 row-start-2'>
+            <div
+              className={transformHopForward}
+              onClick={balanceHandler('Hop Forward')}
+            >
+              <Selector name='Hop Forward' />
             </div>
-            <div className='col-span-2 col-start-3 row-start-2'>
-              <div
-                className={transformHopForward}
-                onClick={balanceHandler('Hop Forward')}
-              >
-                <Selector name='Hop Forward' />
-              </div>
+          </div>
+          <div className='col-span-3 col-start-4 row-start-3'>
+            <div
+              className={transformLightBodied}
+              onClick={bodyHandler('Light-Bodied')}
+            >
+              <Selector name='Light-Bodied' />
             </div>
-            <div className='col-span-3 col-start-4 row-start-3'>
-              <div
-                className={transformLightBodied}
-                onClick={bodyHandler('Light-Bodied')}
-              >
-                <Selector name='Light-Bodied' />
-              </div>
-            </div>
+          </div>
 
-            <div className='col-span-2 col-start-5 row-start-2'>
-              <div
-                className={transformYeastForward}
-                onClick={balanceHandler('Yeast Forward')}
-              >
-                <Selector name='Yeast Forward' />
-              </div>
+          <div className='col-span-2 col-start-5 row-start-2'>
+            <div
+              className={transformYeastForward}
+              onClick={balanceHandler('Yeast Forward')}
+            >
+              <Selector name='Yeast Forward' />
             </div>
           </div>
-        )}
+        </div>
+      )}
 
-        {/* Render beer list */}
-        {!loading && recipe.ingredients.length === 0 && malt !== '' && (
-          <div className=' mx-6 grid grid-cols-6 grid-rows-3 gap-1.5'>
-            {beerListUpdate.map((beer) => (
-              <div
-                key={(beer as { name: string }).name}
-                onClick={recipeHandler(beer.name)}
-                className={beer.name === beerSelection ? selected : unselected}
-              >
-                <Selector beer={beer} setBeerSelection={setBeerSelection} />
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
+      {/* Render beer list */}
+      {!loading && recipe.ingredients.length === 0 && malt !== '' && (
+        <div className=' mx-6 grid grid-cols-6 grid-rows-3 gap-1.5'>
+          {beerListUpdate.map((beer) => (
+            <div
+              key={(beer as { name: string }).name}
+              onClick={recipeHandler(beer.name)}
+              className={beer.name === beerSelection ? selected : unselected}
+            >
+              <Selector beer={beer} setBeerSelection={setBeerSelection} />
+            </div>
+          ))}
+        </div>
+      )}
 
       {/* Recipe */}
       {recipe && recipe.ingredients.length > 0 && (
-        <div className='grid grid-cols-2'>
-          <div className='col-start-1 ml-10 justify-items-center '>
-            <h3 className='mb-10'>Ingredients</h3>
-            {recipe.ingredients &&
-              recipe.ingredients.map((ingredient, index) => (
-                <>
-                  <div key={index}>
-                    <span>{ingredient.ingredient}</span>:{' '}
-                    <span>{ingredient.amount}</span>
-                  </div>
-                </>
-              ))}
+        <>
+          <div className='grid grid-cols-2'>
+            <div className='col-start-1 ml-12 content-center '>
+              <h3 className='mb-10'>Ingredients</h3>
+              {recipe.ingredients &&
+                recipe.ingredients.map((ingredient, index) => (
+                  <>
+                    <div key={index}>
+                      <span>{ingredient.ingredient}</span>:{' '}
+                      <span>{ingredient.amount}</span>
+                    </div>
+                  </>
+                ))}
 
-            <h3 className='my-10'>Instructions</h3>
-            {recipe &&
-              recipe.instructions &&
-              recipe.instructions.map((instruction, index) => (
-                <div key={index}>{instruction}</div>
-              ))}
-          </div>
-
-          {/* Image */}
-
-          <div className='flex flex-row'>
-            <div>
-              <img src={image} alt='' className='max-w-36' />
+              <h3 className='my-10'>Instructions</h3>
+              {recipe &&
+                recipe.instructions &&
+                recipe.instructions.map((instruction, index) => (
+                  <div key={index}>{instruction}</div>
+                ))}
             </div>
+
+            {/* Image */}
+
+            <div className='col-start-2 content-center'>
+              <div>
+                <img src={image} alt='' className='ml-36 max-w-xl' />
+              </div>
+            </div>
+          </div>
+          <div className='mt-10 flex justify-center'>
             <button
-              className={unselected}
+              className={unselected + ' px-36'}
               onClick={() => setRecipe({ ingredients: [], instructions: [] })}
             >
               Clear
             </button>
           </div>
-        </div>
+        </>
       )}
     </div>
   );

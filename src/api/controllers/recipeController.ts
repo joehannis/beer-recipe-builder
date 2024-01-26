@@ -30,7 +30,7 @@ const recipeController = {
                   },
                 },
                 description:
-                  'The ingredients to use in the recipe with the amount in grams. Include the amount of water to use in the mash and sparge in L.',
+                  'The ingredients to use in the recipe with the amount in grams. Include the amount of water to use in the mash and sparge in L. Specify the yeast strain',
               },
               instructions: {
                 type: 'array',
