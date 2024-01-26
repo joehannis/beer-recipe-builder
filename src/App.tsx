@@ -13,15 +13,17 @@ function App() {
     body: string;
     balance: string;
   }
+
   const [beerListUpdate, setBeerListUpdate] = useState<Beer[]>(beerList);
   const [malt, setMalt] = useState<string>('');
   const [body, setBody] = useState<string>('');
   const [balance, setBalance] = useState<string>('');
   const [beerSelection, setBeerSelection] = useState<string>('');
-  const [recipe, setRecipe] = useState<string>('');
+  const [recipe, setRecipe] = useState<{
+    ingredients: { ingredient: string; amount: string }[];
+    instructions: string[];
+  }>({ ingredients: [], instructions: [] });
   const [image, setImage] = useState<string>('');
-  console.log('Recipe:', recipe);
-  console.log('Image:', image);
 
   const unselected: string =
     'flex justify-center rounded-none border-2 border-solid border-black bg-white hover:bg-red-600 hover:text-white';
@@ -229,7 +231,29 @@ function App() {
           </div>
           {/* Recipe */}
           <div className='flex flex-col'>
-            <div>{recipe ? recipe : ''}</div>
+            <h3>Ingredients</h3>
+            {recipe &&
+              recipe.ingredients &&
+              recipe.ingredients.map((ingredient, index) => (
+                <div key={index}>
+                  {ingredient.ingredient} {ingredient.amount}
+                </div>
+              ))}
+          </div>
+          <div className='flex flex-col'>
+            <h3>Instructions</h3>
+            {recipe &&
+              recipe.instructions &&
+              recipe.instructions.map((instruction, index) => (
+                <div key={index}>{instruction}</div>
+              ))}
+          </div>
+
+          {/* Image */}
+          <div className='flex flex-col'>
+            <div>
+              <img src={image} alt='' />
+            </div>
           </div>
         </div>
       </div>

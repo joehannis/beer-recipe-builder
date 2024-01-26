@@ -7,13 +7,45 @@ const recipeController = {
   async getRecipe(req: Request, res: Response) {
     const beer = req.query.beer;
     const response = await openai.chat.completions.create({
+      model: 'gpt-3.5-turbo-1106',
       messages: [
         {
           role: 'system',
-          content: `Give me a step by step recipe in grams to create a 20L batch of ${beer} beer. Don't add anything to the response, just the recipe with ingredients, amount and instructions.`,
+          content: `Create a new beer object for ${beer} beer.`,
         },
       ],
-      model: 'gpt-3.5-turbo',
+      functions: [
+        {
+          name: 'createBeerObject',
+          parameters: {
+            type: 'object',
+            properties: {
+              ingredients: {
+                type: 'array',
+                items: {
+                  type: 'object',
+                  properties: {
+                    ingredient: { type: 'string' },
+                    amount: { type: 'string' },
+                  },
+                },
+                description:
+                  'The ingredients to use in the recipe with the amount in grams.',
+              },
+              instructions: {
+                type: 'array',
+                items: {
+                  type: 'string',
+                },
+                description:
+                  'The instructions to use in the recipe with temperatures in C and F.',
+              },
+            },
+            required: ['ingredients', 'instructions'],
+          },
+        },
+      ],
+      function_call: { name: 'createBeerObject' },
     });
 
     const image = await openai.images.generate({
@@ -22,12 +54,11 @@ const recipeController = {
       n: 1,
       size: '1024x1024',
     });
-    console.log('this is image');
-    console.log(image);
 
-    const data = response.choices[0].message.content;
-    console.log(data);
-    return res.json({ recipe: data, image: image.data[0].url });
+    return res.json({
+      recipe: response.choices[0].message.function_call?.arguments,
+      image: image.data[0].url,
+    });
   },
 };
 

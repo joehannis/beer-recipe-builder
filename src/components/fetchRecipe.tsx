@@ -1,8 +1,21 @@
+// fetchRecipe.tsx
 const fetchRecipe = async (beer: string) => {
-  const response = await fetch(`http://localhost:3000?beer=${beer}`);
-  console.log('API Response:', response);
-  const data = await response.json();
-  return data;
+  try {
+    const response = await fetch(`http://localhost:3000/?beer=${beer}`);
+    const data = await response.json();
+    if (!response.ok) {
+      throw new Error(data.message || 'Failed to fetch recipe');
+    }
+    console.log('Received data:', data);
+    const parsedRecipe = JSON.parse(data.recipe);
+    return {
+      recipe: parsedRecipe,
+      image: data.image,
+    };
+  } catch (error) {
+    console.error('Error fetching recipe:', error);
+    throw error;
+  }
 };
 
 export default fetchRecipe;
