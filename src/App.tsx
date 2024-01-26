@@ -156,11 +156,14 @@ function App() {
 
   return (
     // Main App Container
-    <div className='size-full flex-col'>
+    <div className='mb-10 size-full flex-col'>
       {/* Header */}
-      <h1 className='flex h-20 flex-row items-center justify-center text-3xl font-bold text-red-600 underline'>
-        Beer Recipe Creator
-      </h1>
+      <div>
+        <h1 className='flex h-20 flex-row items-center justify-center text-3xl font-bold text-red-600 underline'>
+          Beer Recipe Creator
+        </h1>
+      </div>
+
       {/* Body */}
       <div className='flex flex-col'>
         {loading && (
@@ -169,22 +172,23 @@ function App() {
           </div>
         )}
         {!loading && recipe.ingredients.length === 0 && (
-          <div className='flex flex-row items-center justify-start'>
-            {/* Malt character 1 */}
-            <div className='flex flex-col'>
+          <div className='mb-16 grid grid-cols-6 grid-rows-3'>
+            <div className='col-span-3 col-start-1 row-start-1'>
               <div className={transformDark} onClick={maltHandler('Dark')}>
                 <Selector name='Dark' />
               </div>
-              <div>
-                <div
-                  className={
-                    transformMaltForward === selected ? selected : unselected
-                  }
-                  onClick={balanceHandler('Malt Forward')}
-                >
-                  <Selector name='Malt Forward' />
-                </div>
+            </div>
+            <div className='col-span-2 col-start-1 row-start-2'>
+              <div
+                className={
+                  transformMaltForward === selected ? selected : unselected
+                }
+                onClick={balanceHandler('Malt Forward')}
+              >
+                <Selector name='Malt Forward' />
               </div>
+            </div>
+            <div className='col-span-3 col-start-1 row-start-3'>
               <div
                 className={transformFullBodied}
                 onClick={bodyHandler('Full-Bodied')}
@@ -192,19 +196,20 @@ function App() {
                 <Selector name='Full-Bodied' />
               </div>
             </div>
-            {/* Malt character 2 */}
-            <div className='flex flex-col'>
+            <div className='col-span-3 col-start-4 row-start-1'>
               <div className={transformLight} onClick={maltHandler('Light')}>
                 <Selector name='Light' />
               </div>
-              <div>
-                <div
-                  className={transformHopForward}
-                  onClick={balanceHandler('Hop Forward')}
-                >
-                  <Selector name='Hop Forward' />
-                </div>
+            </div>
+            <div className='col-span-2 col-start-3 row-start-2'>
+              <div
+                className={transformHopForward}
+                onClick={balanceHandler('Hop Forward')}
+              >
+                <Selector name='Hop Forward' />
               </div>
+            </div>
+            <div className='col-span-3 col-start-4 row-start-3'>
               <div
                 className={transformLightBodied}
                 onClick={bodyHandler('Light-Bodied')}
@@ -212,32 +217,30 @@ function App() {
                 <Selector name='Light-Bodied' />
               </div>
             </div>
-            <div className='flex flex-col'>
-              <div></div>
-              <div>
-                <div
-                  className={transformYeastForward}
-                  onClick={balanceHandler('Yeast Forward')}
-                >
-                  <Selector name='Yeast Forward' />
-                </div>
+
+            <div className='col-span-2 col-start-5 row-start-2'>
+              <div
+                className={transformYeastForward}
+                onClick={balanceHandler('Yeast Forward')}
+              >
+                <Selector name='Yeast Forward' />
               </div>
             </div>
+          </div>
+        )}
 
-            {/* Render beer list */}
-            <div className='flex flex-col'>
-              {beerListUpdate.map((beer) => (
-                <div
-                  key={(beer as { name: string }).name}
-                  onClick={recipeHandler(beer.name)}
-                  className={
-                    beer.name === beerSelection ? selected : unselected
-                  }
-                >
-                  <Selector beer={beer} setBeerSelection={setBeerSelection} />
-                </div>
-              ))}
-            </div>
+        {/* Render beer list */}
+        {!loading && recipe.ingredients.length === 0 && malt !== '' && (
+          <div className='flex flex-col'>
+            {beerListUpdate.map((beer) => (
+              <div
+                key={(beer as { name: string }).name}
+                onClick={recipeHandler(beer.name)}
+                className={beer.name === beerSelection ? selected : unselected}
+              >
+                <Selector beer={beer} setBeerSelection={setBeerSelection} />
+              </div>
+            ))}
           </div>
         )}
       </div>
