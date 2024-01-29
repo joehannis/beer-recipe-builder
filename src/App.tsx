@@ -249,7 +249,12 @@ function App() {
         {/* Recipe */}
         {recipe && recipe.ingredients.length > 0 && (
           <>
-            <div className='mt-16 flex max-h-fit max-w-80 flex-col flex-wrap content-center items-center justify-center'>
+            <div className='mt-16 flex max-h-fit max-w-80 flex-col flex-wrap'>
+              <h3 className='flex content-center items-center justify-center font-bold'>
+                {beerSelection}
+              </h3>
+            </div>
+            <div className='mt-5 flex max-h-fit max-w-80 flex-col flex-wrap content-center items-center justify-center'>
               <h3 className='font-bold'>Ingredients</h3>
               {recipe.ingredients &&
                 recipe.ingredients.map((ingredient, index) => (
@@ -272,7 +277,7 @@ function App() {
                 recipe.instructions &&
                 recipe.instructions.map((instruction, index) => (
                   <div key={index} className='flex-col text-sm'>
-                    {`${index + 1}. ` + instruction}
+                    {`${instruction} \n`}
                   </div>
                 ))}
             </div>
