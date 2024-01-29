@@ -6,6 +6,7 @@ import Selector from './components/Selector';
 import beerList from './components/beerList';
 import fetchRecipe from './components/fetchRecipe';
 import BeerLoader from './components/beer-loader/BeerLoader';
+import updateBeerList from './components/UpdateBeerList';
 
 function App() {
   interface Beer {
@@ -27,29 +28,6 @@ function App() {
     instructions: string[];
   }>({ ingredients: [], instructions: [] });
   const [image, setImage] = useState<string>('');
-
-  const unselected: string =
-    'flex justify-center rounded-none border-2 border-solid border-black bg-white hover:bg-red-600 hover:text-white';
-  const selected: string =
-    'flex justify-center rounded-none border-2 border-solid border-black bg-red-600 hover:bg-white hover:text-red-600';
-
-  let [
-    transformDark,
-    transformLight,
-    transformFullBodied,
-    transformLightBodied,
-    transformMaltForward,
-    transformHopForward,
-    transformYeastForward,
-  ] = useRef([
-    unselected,
-    unselected,
-    unselected,
-    unselected,
-    unselected,
-    unselected,
-    unselected,
-  ]).current;
 
   const maltHandler = (maltInput: string) => () => {
     setMalt(maltInput);
@@ -73,46 +51,31 @@ function App() {
   };
 
   useEffect(() => {
-    if (malt === 'Dark') {
-      const updatedBeerList: Beer[] = beerList.filter((beer) => {
-        if (balance !== '' && body !== '') {
-          if (beer.balance === balance && beer.body === body) {
-            return beer.malt === 'Dark';
-          }
-        } else if (balance !== '') {
-          if (beer.balance === balance) {
-            return beer.malt === 'Dark';
-          }
-        } else if (body !== '') {
-          if (beer.body === body) {
-            return beer.malt === 'Dark';
-          }
-        } else {
-          return beer.malt === 'Dark';
-        }
-      });
-      setBeerListUpdate(updatedBeerList);
-    } else if (malt === 'Light') {
-      const updatedBeerList: Beer[] = beerList.filter((beer) => {
-        if (balance !== '' && body !== '') {
-          if (beer.balance === balance && beer.body === body) {
-            return beer.malt === 'Light';
-          }
-        } else if (balance !== '') {
-          if (beer.balance === balance) {
-            return beer.malt === 'Light';
-          }
-        } else if (body !== '') {
-          if (beer.body === body) {
-            return beer.malt === 'Light';
-          }
-        } else {
-          return beer.malt === 'Light';
-        }
-      });
-      setBeerListUpdate(updatedBeerList);
-    }
+    updateBeerList(beerList, setBeerListUpdate, malt, balance, body);
   }, [malt, balance, body]);
+
+  const unselected: string =
+    'flex justify-center rounded-none border-2 border-solid border-black bg-white hover:bg-red-600 hover:text-white';
+  const selected: string =
+    'flex justify-center rounded-none border-2 border-solid border-black bg-red-600 hover:bg-white hover:text-red-600';
+
+  let [
+    transformDark,
+    transformLight,
+    transformFullBodied,
+    transformLightBodied,
+    transformMaltForward,
+    transformHopForward,
+    transformYeastForward,
+  ] = useRef([
+    unselected,
+    unselected,
+    unselected,
+    unselected,
+    unselected,
+    unselected,
+    unselected,
+  ]).current;
 
   switch (malt) {
     case 'Dark':
