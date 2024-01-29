@@ -6,7 +6,7 @@ import Selector from './components/Selector';
 import beerList from './components/beerList';
 import fetchRecipe from './components/fetchRecipe';
 import BeerLoader from './components/beer-loader/BeerLoader';
-import updateBeerList from './components/UpdateBeerList';
+import updateBeerList from './components/updateBeerList';
 
 function App() {
   interface Beer {
