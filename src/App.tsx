@@ -157,9 +157,9 @@ function App() {
   return (
     // Main App Container
     <>
-      <div className='flex max-h-screen flex-col items-center justify-center'>
+      <div className='flex max-h-fit max-w-full flex-col items-center justify-center'>
         {/* Header */}
-        <h1 className='absolute inset-x-0 top-5 mb-12 flex items-center justify-center'>
+        <h1 className='absolute inset-x-0 top-5 mb-6 flex items-center justify-center'>
           Beer Recipe Creator
         </h1>
 
@@ -170,7 +170,7 @@ function App() {
           </div>
         )}
         {!loading && recipe.ingredients.length === 0 && (
-          <div className='mt-20 grid grid-cols-6 grid-rows-3 gap-1.5'>
+          <div className='mt-20 grid grid-cols-6 grid-rows-3 gap-1'>
             <div className='col-span-3 col-start-1 row-start-1'>
               <div className={transformDark} onClick={maltHandler('Dark')}>
                 <Selector name='Dark' />
@@ -229,12 +229,16 @@ function App() {
 
         {/* Render beer list */}
         {!loading && recipe.ingredients.length === 0 && malt !== '' && (
-          <div className='flex basis-1/3 flex-row flex-wrap gap-1.5'>
+          <div className='mt-10 flex flex-row flex-wrap content-center items-center justify-center gap-1.5'>
             {beerListUpdate.map((beer) => (
               <div
                 key={(beer as { name: string }).name}
                 onClick={recipeHandler(beer.name)}
-                className={beer.name === beerSelection ? selected : unselected}
+                className={
+                  beer.name === beerSelection
+                    ? `${selected + 'p-0.5'}`
+                    : `${unselected + 'p-0.5'}`
+                }
               >
                 <Selector beer={beer} setBeerSelection={setBeerSelection} />
               </div>
@@ -245,7 +249,7 @@ function App() {
         {/* Recipe */}
         {recipe && recipe.ingredients.length > 0 && (
           <>
-            <div className='mt-20 flex flex-col'>
+            <div className='mt-16 flex max-h-fit max-w-80 flex-col flex-wrap content-center items-center justify-center'>
               <h3 className='font-bold'>Ingredients</h3>
               {recipe.ingredients &&
                 recipe.ingredients.map((ingredient, index) => (
@@ -256,19 +260,19 @@ function App() {
                 ))}
             </div>
 
-            <div className='w-36'>
+            <div className='mt-5 w-36'>
               <img src={image} alt='' />
             </div>
 
-            <div className='flex max-h-fit max-w-80 flex-col flex-wrap'>
+            <div className='mt-5 flex max-h-fit max-w-80 flex-col flex-wrap'>
               <h3 className='flex content-center items-center justify-center font-bold'>
                 Instructions
               </h3>
               {recipe &&
                 recipe.instructions &&
                 recipe.instructions.map((instruction, index) => (
-                  <div key={index} className='text-sm'>
-                    {'- ' + instruction}
+                  <div key={index} className='flex-col text-sm'>
+                    {`${index + 1}. ` + instruction}
                   </div>
                 ))}
             </div>
@@ -276,7 +280,7 @@ function App() {
         )}
       </div>
       {recipe && recipe.ingredients.length > 0 && (
-        <div className='absolute inset-x-0 bottom-0 flex items-center justify-center'>
+        <div className='mt-5 flex items-center justify-center'>
           <button
             className={unselected + ' px-36'}
             onClick={() => {
