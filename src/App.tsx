@@ -58,6 +58,10 @@ function App() {
     'flex justify-center rounded-none border-2 border-solid border-black bg-white hover:bg-red-600 hover:text-white';
   const selected: string =
     'flex justify-center rounded-none border-2 border-solid border-black bg-red-600 hover:bg-white hover:text-red-600';
+  const unselectedBeer: string =
+    'flex justify-center rounded-none border-2 p-2 border-solid border-black bg-white hover:bg-red-600 hover:text-white';
+  const selectedBeer: string =
+    'flex justify-center rounded-none border-2 p-2 border-solid border-black bg-red-600 hover:bg-white hover:text-red-600';
 
   let [
     transformDark,
@@ -192,15 +196,13 @@ function App() {
 
         {/* Render beer list */}
         {!loading && recipe.ingredients.length === 0 && malt !== '' && (
-          <div className='mt-10 flex flex-row flex-wrap content-center items-center justify-center gap-1.5'>
+          <div className='mt-10 flex grow flex-row flex-wrap content-center items-center justify-center gap-1.5'>
             {beerListUpdate.map((beer) => (
               <div
                 key={(beer as { name: string }).name}
                 onClick={recipeHandler(beer.name)}
                 className={
-                  beer.name === beerSelection
-                    ? `${selected + 'p-0.5'}`
-                    : `${unselected + 'p-0.5'}`
+                  beer.name === beerSelection ? selectedBeer : unselectedBeer
                 }
               >
                 <Selector beer={beer} setBeerSelection={setBeerSelection} />
