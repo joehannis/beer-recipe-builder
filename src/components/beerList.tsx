@@ -24,7 +24,18 @@ const beerList = [
     balance: 'Yeast Forward',
   },
   { name: 'APA', malt: 'Light', body: 'Light-Bodied', balance: 'Hop Forward' },
-  { name: 'IPA', malt: 'Light', body: 'Light-Bodied', balance: 'Hop Forward' },
+  {
+    name: 'American IPA',
+    malt: 'Light',
+    body: 'Light-Bodied',
+    balance: 'Hop Forward',
+  },
+  {
+    name: 'English IPA',
+    malt: 'Light',
+    body: 'Light-Bodied',
+    balance: 'Hop Forward',
+  },
   {
     name: 'Bitter',
     malt: 'Light',
