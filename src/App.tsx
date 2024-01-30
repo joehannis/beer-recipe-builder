@@ -18,7 +18,6 @@ function App() {
 
   const [beerListUpdate, setBeerListUpdate] = useState<Beer[]>(beerList);
   const [loading, setLoading] = useState(false);
-  console.log(loading);
   const [malt, setMalt] = useState<string>('');
   const [body, setBody] = useState<string>('');
   const [balance, setBalance] = useState<string>('');

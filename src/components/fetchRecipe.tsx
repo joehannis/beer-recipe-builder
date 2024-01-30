@@ -6,7 +6,6 @@ const fetchRecipe = async (beer: string) => {
     if (!response.ok) {
       throw new Error(data.message || 'Failed to fetch recipe');
     }
-    console.log('Received data:', data);
     const parsedRecipe = JSON.parse(data.recipe);
     return {
       recipe: parsedRecipe,
