@@ -10,10 +10,10 @@ const BeerSelection: React.FC<BeerSelectionProps> = ({ recipe, image }) => {
   return (
     <>
       <div className='flex max-h-fit max-w-80 flex-col flex-wrap content-center items-center justify-center'>
-        <h3 className='font-bold'>Ingredients</h3>
+        <h3 className='text-lg font-bold'>Ingredients</h3>
         {recipe.ingredients &&
           recipe.ingredients.map((ingredient, index) => (
-            <div key={index} className='text-sm'>
+            <div key={index} className='text-lg'>
               <span>{ingredient.ingredient}</span>:{' '}
               <span>{ingredient.amount}</span>
             </div>

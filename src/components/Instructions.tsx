@@ -9,15 +9,17 @@ const Instructions: React.FC<InstructionsProps> = ({ recipe }) => {
   return (
     <>
       <div className='mt-5 flex max-h-fit max-w-80 flex-col flex-wrap'>
-        <h3 className='flex content-center items-center justify-center font-bold'>
+        <h3 className='flex content-center items-center justify-center text-lg font-bold'>
           Instructions
         </h3>
         {recipe &&
           recipe.instructions &&
           recipe.instructions.map((instruction, index) => (
-            <div key={index} className='flex-col text-sm'>
-              {`${instruction} \n`}
-            </div>
+            <div
+              key={index}
+              className='flex flex-col flex-wrap'
+              dangerouslySetInnerHTML={{ __html: `${instruction}<br/><br/>` }}
+            ></div>
           ))}
       </div>
     </>

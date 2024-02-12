@@ -31,7 +31,7 @@ function App() {
     <>
       <div className='flex max-h-fit max-w-full flex-col items-center justify-center'>
         {/* Header */}
-        <h1 className='absolute inset-x-0 top-5 mb-6 flex items-center justify-center text-lg font-bold'>
+        <h1 className='absolute inset-x-0 top-5 mb-6 flex items-center justify-center text-xl font-bold'>
           Beer Recipe Creator
         </h1>
 
@@ -69,7 +69,7 @@ function App() {
           {recipe && recipe.ingredients.length > 0 && (
             <>
               <div className='mt-12 flex max-h-fit max-w-80 flex-col flex-wrap'>
-                <h3 className='flex content-center items-center justify-center text-lg font-bold text-red-600'>
+                <h3 className='flex content-center items-center justify-center text-xl font-bold text-red-600'>
                   {beerSelection}
                 </h3>
               </div>
@@ -84,10 +84,10 @@ function App() {
           )}
 
           {recipe && recipe.ingredients.length > 0 && (
-            <div className='mt-5 flex items-center justify-center'>
+            <div className='my-5 flex items-center justify-center'>
               <button
                 className={
-                  'flex justify-center rounded-none border-2 border-solid border-black bg-white px-36 hover:bg-red-600 hover:text-white'
+                  'mb-5 flex justify-center rounded-none border-2 border-solid border-black bg-white px-36 hover:bg-red-600 hover:text-white'
                 }
                 onClick={() => {
                   setRecipe({ ingredients: [], instructions: [] });
