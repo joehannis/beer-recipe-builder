@@ -1,4 +1,4 @@
 <h1>Beer Recipe Builder</h1>
 
-<p>Use AI to generate the recipe for your next brewday</p>
-<p>Requires an API key from https://platform.openai.com/ </p>
+<p>Use AI to generate the recipe for your next brewday. View at https://beer-recipe-builder.vercel.app/</p>
+<p>To build, you will need an API key from https://platform.openai.com/ </p>
