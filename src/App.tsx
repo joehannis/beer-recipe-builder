@@ -31,7 +31,7 @@ function App() {
     <>
       <div className='flex max-h-fit max-w-full flex-col items-center justify-center'>
         {/* Header */}
-        <h1 className='absolute inset-x-0 top-5 mb-6 flex items-center justify-center'>
+        <h1 className='absolute inset-x-0 top-5 mb-6 flex items-center justify-center text-lg font-bold'>
           Beer Recipe Creator
         </h1>
 
