@@ -68,7 +68,7 @@ function App() {
         <div className='flex max-h-80 grow flex-col'>
           {recipe && recipe.ingredients.length > 0 && (
             <>
-              <div className='mt-12 flex max-h-fit max-w-80 flex-col flex-wrap'>
+              <div className='mt-12 flex max-h-fit max-w-80 flex-col flex-wrap justify-center'>
                 <h3 className='flex content-center items-center justify-center text-xl font-bold text-red-600'>
                   {beerSelection}
                 </h3>
@@ -77,7 +77,7 @@ function App() {
                 <Ingredients recipe={recipe} image={image} />
               </div>
 
-              <div className='mt-5 flex max-h-fit max-w-80 flex-col flex-wrap'>
+              <div className='mt-5 flex max-h-fit max-w-80 flex-col flex-wrap justify-center'>
                 <Instructions recipe={recipe} />
               </div>
             </>
