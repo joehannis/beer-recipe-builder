@@ -1,6 +1,8 @@
 import { Request, Response } from 'express';
 import OpenAI from 'openai';
 
+console.log(process.env.OPENAI_API_KEY);
+
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 const recipeController = {

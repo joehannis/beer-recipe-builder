@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc && vite build && npx tsx src/api/bin/index.ts",
     "lint": "eslint ./src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
@@ -17,7 +17,7 @@
     "@mui/icons-material": "^5.15.6",
     "@mui/material": "^5.15.6",
     "cors": "^2.8.5",
-    "dotenv": "^16.4.0",
+    "dotenv": "^16.4.5",
     "eslint-plugin-tailwindcss": "^3.14.0",
     "express": "^4.18.2",
     "openai": "^4.25.0",
@@ -40,9 +40,10 @@
     "prettier": "^3.2.4",
     "prettier-plugin-tailwindcss": "^0.5.11",
     "tailwindcss": "^3.4.1",
+    "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
-    "tsx": "^4.7.0",
-    "typescript": "^5.3.3",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.3",
     "vite": "^5.0.8"
   }
 }
