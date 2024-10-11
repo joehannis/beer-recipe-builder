@@ -1,10 +1,10 @@
-import express, { Express } from 'express';
+import express from 'express';
 import cors from 'cors';
 import 'dotenv/config';
 import recipeRoute from './routes/recipeRoute';
 
-const app: Express = express();
-const port = process.env.PORT || 3000;
+const app = express();
+const port = 3000;
 app.use(
   cors({
     origin: [
