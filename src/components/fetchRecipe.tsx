@@ -1,7 +1,9 @@
 // fetchRecipe.tsx
 const fetchRecipe = async (beer: string) => {
   try {
-    const response = await fetch(`http://localhost:3000/?beer=${beer}`);
+    const response = await fetch(
+      `profound-upliftment.railway.internal/?beer=${beer}`
+    );
     const data = await response.json();
     if (!response.ok) {
       throw new Error(data.message || 'Failed to fetch recipe');
