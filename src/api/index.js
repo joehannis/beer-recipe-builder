@@ -13,7 +13,7 @@ app.use(
       'http://localhost:3000',
       'http://localhost:5173',
       'http://localhost:4173',
-      'https://beer-recipe-builder.vercel.app/',
+      'https://profound-upliftment.railway.internal',
     ],
     methods: ['POST', 'GET'],
     credentials: true,
