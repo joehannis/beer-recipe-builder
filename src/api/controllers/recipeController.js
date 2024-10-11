@@ -1,10 +1,10 @@
-import { Request, Response } from 'express';
 import OpenAI from 'openai';
 
+// eslint-disable-next-line no-undef
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 const recipeController = {
-  async getRecipe(req: Request, res: Response) {
+  async getRecipe(req, res) {
     const beer = req.query.beer;
     const response = await openai.chat.completions.create({
       model: 'gpt-3.5-turbo-1106',
