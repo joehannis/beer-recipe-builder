@@ -2,7 +2,7 @@
 const fetchRecipe = async (beer: string) => {
   try {
     const response = await fetch(
-      `profound-upliftment.railway.internal/?beer=${beer}`
+      `https://profound-upliftment-production.up.railway.app/?beer=${beer}`
     );
     const data = await response.json();
     if (!response.ok) {

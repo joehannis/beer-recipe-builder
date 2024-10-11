@@ -13,7 +13,7 @@ app.use(
       'http://localhost:3000',
       'http://localhost:5173',
       'http://localhost:4173',
-      'profound-upliftment.railway.internal',
+      'https://beer-recipe-builder-production.up.railway.app/',
     ],
     methods: ['POST', 'GET'],
     credentials: true,
